@@ -57,23 +57,36 @@ def juego():
         livesLabel = Label(top, text="Vidas Extra: " + str(lives), bg="red",fg="white", font=(50))
         livesLabel.place(x=450, y=15)
 
-        ship = Image.open("nave.jpg")
+        # CREACION NAVE
+        ship = Image.open("nave.png")
         shipRe = ship.resize((50, 50), Image.ANTIALIAS)
         shipReFin = ImageTk.PhotoImage(shipRe, master=canvasJuego)
-        myship = canvasJuego.create_image(500, 400, image=shipReFin)
+        myship = canvasJuego.create_image(100, 100, image=shipReFin)
 
+        # MOVIMIENTOS NAVE
         def moverArriba(event):
-                canvasJuego.move(myship, 0,-10)
+                canvasJuego.move(myship, 0, -10)
+
         canvasJuego.bind_all("<Up>", moverArriba)
+
         def moverAbajo(event):
-                canvasJuego.move(myship, 0,10)
+                canvasJuego.move(myship, 0, 10)
+
         canvasJuego.bind_all("<Down>", moverAbajo)
+
         def moverDerecha(event):
-                canvasJuego.move(myship, 10,0)
+                canvasJuego.move(myship, 10, 0)
+
         canvasJuego.bind_all("<Right>", moverDerecha)
+
         def moverIzquierda(event):
-                canvasJuego.move(myship, -10,0)
+                canvasJuego.move(myship, -10, 0)
+
         canvasJuego.bind_all("<Left>", moverIzquierda)
+
+
+
+        # REGRESAR AL MENU DE INICIO
         def regresa():
             canvasJuego.destroy()
             top.destroy()
@@ -81,7 +94,9 @@ def juego():
         btnRegresa = Button(top, text="REGRESA", font=("Britannic Bold", 16), width=10, height=1, fg="black",
                             command=regresa)
         btnRegresa.place(x=850, y=8)
-        canvasSobre.lift()
+        myship.lift(AboveThis=btnRegresa)
+
+
 btnA = Button(canvasPrin, text="Juego", font=("Britannic Bold", 16) ,fg="white", bg= "#EFCA2E", width= 20,height= 1, anchor="center",command=juego)
 btnA.place(x=400, y=700)
 
